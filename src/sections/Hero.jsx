@@ -28,7 +28,7 @@ function Hero() {
         </div>
 
         {/* Name */}
-        <h1 className="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight">
+        <h1 className="text-4xl md:text-6xl mb-4 tracking-tight font-(--font-heading)">
           Shazzad Hosen
         </h1>
 

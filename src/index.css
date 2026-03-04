@@ -6,14 +6,20 @@
     --color-dark-bg: #020617;
     --color-dark-card: #0f172a;
     --color-dark-card: #0f172a;
+    --font-heading: "Sora", sans-serif;
+    --font-body: "Inter", sans-serif;
 }
 
 body {
     background-color: var(--color-dark-bg);
-    font-family: var(--font-sans);
+    font-family: var(--font-body);
     color: white;
 }
 
 html {
     scroll-behavior: smooth;
+}
+
+section {
+    scroll-margin-top: 100px;
 }
