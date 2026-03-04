@@ -29,7 +29,7 @@ function Navbar() {
   return (
     <nav className="fixed w-full top-0 left-0 backdrop-blur-md bg-black/40 border-b border-white/10 z-50">
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Brand/Logo */}
+        {/* Brand*/}
         <div className="text-3xl font-bold tracking-tight text-white">
           SH<span className="text-primary">.</span>
         </div>
