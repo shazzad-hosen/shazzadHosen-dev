@@ -6,7 +6,6 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [active, setActive] = useState("home");
 
-  // Function to handle the scroll to top
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,

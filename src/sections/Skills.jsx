@@ -6,6 +6,7 @@ function Skills() {
       title: "Frontend",
       icon: <Monitor className="text-primary" size={20} />,
       skills: [
+        "HTML5",
         "React",
         "Tailwind CSS",
         "JavaScript (ES6+)",
@@ -19,7 +20,10 @@ function Skills() {
         "Node.js",
         "Express.js",
         "MongoDB",
+        "MySQL",
+        "PostgreSQL",
         "JWT Auth",
+        "OAuth",
         "REST APIs",
         "Clean Architecture",
       ],
@@ -27,7 +31,7 @@ function Skills() {
     {
       title: "Tools & DevOps",
       icon: <Terminal className="text-primary" size={20} />,
-      skills: ["Git", "GitHub", "VS Code", "Postman", "MongoDB Atlas"],
+      skills: ["Git", "GitHub", "Postman", "MongoDB Atlas", "Prisma", "Linux"],
     },
   ];
 
@@ -40,7 +44,7 @@ function Skills() {
         {/* Section Heading */}
         <div className="text-center mb-16">
           <h2 className="text-sm uppercase tracking-[0.2em] text-primary font-bold mb-4">
-            Expertise
+            02. Expertise
           </h2>
           <h3 className="text-3xl md:text-5xl mb-6 font-(--font-heading)">
             Technical Stack

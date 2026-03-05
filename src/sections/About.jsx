@@ -29,7 +29,7 @@ function About() {
 
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col lg:flex-row gap-16 items-start">
-          {/* Left: Bio / Text */}
+          {/* Left: Text */}
           <div className="lg:w-1/2">
             <h2 className="text-sm uppercase tracking-[0.2em] text-primary font-bold mb-4">
               01. Background
