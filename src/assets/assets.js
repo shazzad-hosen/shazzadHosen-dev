@@ -1,11 +1,11 @@
 import logo from "./logo.svg";
-import profile_image from "./profile_image.jpeg";
 import demo from "./demo.png";
+import profile_image from "profile_image.jpg";
 
 const assets = {
   logo,
-  profile_image,
   demo,
+  profile_image,
 };
 
 export default assets;

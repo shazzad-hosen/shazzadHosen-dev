@@ -25,7 +25,7 @@ function Projects() {
     {
       title: "Nestify",
       description:
-        "Nestify is a modern, user-friendly stay-booking platform inspired by Airbnb. It allows users to create, browse, and manage property listings. Built with Node.js, Express, MongoDB, and EJS.",
+        "Nestify is a Fullstack modern, user-friendly stay-booking platform inspired by Airbnb. It allows users to create, browse, and manage property listings. Built with Node.js, Express, MongoDB, and EJS.",
       tech: ["Node", "Express.js", "MongoDB", "Passport.js", "EJS"],
       github: "https://github.com/shazzad-hosen/nestify.git",
       live: "https://nestify-mvgw.onrender.com",

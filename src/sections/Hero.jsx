@@ -1,4 +1,4 @@
-import profile_image from "../assets/profile_image.jpeg";
+import profile_image from "../assets/profile_image.jpg";
 
 function Hero() {
   return (
