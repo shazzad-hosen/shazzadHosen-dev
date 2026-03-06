@@ -36,8 +36,7 @@ function Contact() {
           form.current.reset();
           setTimeout(() => setStatus("idle"), 5000);
         },
-        (error) => {
-          console.log(error.text);
+        () => {
           setStatus("error");
           setTimeout(() => setStatus("idle"), 5000);
         },
@@ -47,23 +46,25 @@ function Contact() {
   return (
     <section
       id="contact"
-      className="py-24 px-6 relative overflow-hidden bg-darkBg"
+      className="py-20 px-5 sm:px-6 relative overflow-hidden bg-darkBg"
     >
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-primary/5 blur-[150px] rounded-full pointer-events-none" />
 
       <div className="max-w-6xl mx-auto relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left Side: Text & Socials */}
+        <div className="grid md:grid-cols-2 gap-12 items-start">
+          {/* LEFT SIDE */}
           <div>
             <h2 className="text-sm uppercase tracking-[0.2em] text-primary font-bold mb-4">
               04. Contact
             </h2>
-            <h3 className="text-4xl md:text-5xl font-bold mb-6">
+
+            <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-tight">
               Let’s build something <br />
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-accent">
-                meaningful together.
+              <span className="text-transparent bg-clip-text  bg-linear-to-r from-primary to-accent">
+                meaningful together
               </span>
             </h3>
+
             <p className="text-white/70 text-lg leading-relaxed mb-8 max-w-md">
               I’m currently looking for new opportunities. Whether you have a
               question or just want to say hi, I’ll try my best to get back to
@@ -71,6 +72,7 @@ function Contact() {
             </p>
 
             <div className="space-y-4">
+              {/* EMAIL CARD */}
               <a
                 href="mailto:mdshazzadhosenzisan@gmail.com"
                 className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-primary/50 transition-all group"
@@ -81,17 +83,20 @@ function Contact() {
                     size={24}
                   />
                 </div>
-                <div>
+
+                <div className="min-w-0">
                   <p className="text-xs text-white/40 uppercase font-bold">
                     Email Me
                   </p>
-                  <p className="text-white font-medium">
+
+                  <p className="text-white font-medium break-all">
                     mdshazzadhosenzisan@gmail.com
                   </p>
                 </div>
               </a>
 
-              <div className="flex gap-4">
+              {/* SOCIAL BUTTONS */}
+              <div className="flex flex-col sm:flex-row gap-4">
                 <a
                   href="https://github.com/shazzad-hosen"
                   target="_blank"
@@ -101,6 +106,7 @@ function Contact() {
                   <Github size={20} className="text-white/70" />
                   <span className="text-white font-medium">GitHub</span>
                 </a>
+
                 <a
                   href="https://www.linkedin.com/in/shazzadhosen"
                   target="_blank"
@@ -114,8 +120,8 @@ function Contact() {
             </div>
           </div>
 
-          {/* Right Side: Contact Form Card */}
-          <div className="p-8 md:p-10 rounded-3xl bg-white/2 border border-white/10 backdrop-blur-xl shadow-2xl">
+          {/* FORM CARD */}
+          <div className="p-5 sm:p-6 md:p-10 rounded-3xl bg-white/2 border border-white/10 backdrop-blur-xl shadow-2xl">
             <div className="flex items-center gap-3 mb-8">
               <MessageSquare className="text-primary" size={24} />
               <h4 className="text-xl font-bold">Send a Message</h4>
@@ -130,9 +136,10 @@ function Contact() {
                     required
                     type="text"
                     placeholder="John Doe"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-all"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[16px] text-white focus:outline-none focus:border-primary transition-all"
                   />
                 </div>
+
                 <div className="space-y-2">
                   <label className="text-sm text-white/60 ml-1">Email</label>
                   <input
@@ -140,7 +147,7 @@ function Contact() {
                     required
                     type="email"
                     placeholder="john@example.com"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-all"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[16px] text-white focus:outline-none focus:border-primary transition-all"
                   />
                 </div>
               </div>
@@ -152,7 +159,7 @@ function Contact() {
                   required
                   type="text"
                   placeholder="Inquiry about Backend Project"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-all"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[16px] text-white focus:outline-none focus:border-primary transition-all"
                 />
               </div>
 
@@ -163,7 +170,7 @@ function Contact() {
                   required
                   rows="4"
                   placeholder="How can I help you?"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-all resize-none"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[16px] text-white focus:outline-none focus:border-primary transition-all resize-none"
                 />
               </div>
 
@@ -172,8 +179,8 @@ function Contact() {
                 disabled={status === "sending" || status === "success"}
                 className={`w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all shadow-lg active:scale-[0.98] ${
                   status === "success"
-                    ? "bg-green-500 text-white cursor-default"
-                    : "bg-linear-to-r from-primary to-accent text-white hover:brightness-110 shadow-primary/20 disabled:opacity-70"
+                    ? "bg-green-500 text-white"
+                    : "bg-linear-to-r from-primary to-accent text-white hover:brightness-110 disabled:opacity-70"
                 }`}
               >
                 {status === "idle" && (
@@ -181,16 +188,19 @@ function Contact() {
                     <Send size={18} /> Send Message
                   </>
                 )}
+
                 {status === "sending" && (
                   <>
                     <Loader2 size={18} className="animate-spin" /> Sending...
                   </>
                 )}
+
                 {status === "success" && (
                   <>
                     <CheckCircle size={18} /> Message Sent!
                   </>
                 )}
+
                 {status === "error" && <>Try Again</>}
               </button>
 
@@ -205,7 +215,7 @@ function Contact() {
 
         <div className="mt-24 pt-8 border-t border-white/5 text-center">
           <p className="text-white/30 text-sm">
-            &copy; {new Date().getFullYear()} Shazzad Hosen. Built with React &
+            © {new Date().getFullYear()} Shazzad Hosen. Built with React &
             Tailwind.
           </p>
         </div>
