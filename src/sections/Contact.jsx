@@ -135,7 +135,7 @@ function Contact() {
                     name="user_name"
                     required
                     type="text"
-                    placeholder="John Doe"
+                    placeholder="Ahmed Jisan"
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[16px] text-white focus:outline-none focus:border-primary transition-all"
                   />
                 </div>
@@ -146,7 +146,7 @@ function Contact() {
                     name="user_email"
                     required
                     type="email"
-                    placeholder="john@example.com"
+                    placeholder="ahmed@example.com"
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[16px] text-white focus:outline-none focus:border-primary transition-all"
                   />
                 </div>
