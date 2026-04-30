@@ -8,39 +8,55 @@ import {
   CheckCircle,
 } from "lucide-react";
 
-import { useRef, useState } from "react";
-import emailjs from "@emailjs/browser";
+import { useState } from "react";
 
 function Contact() {
-  const form = useRef();
   const [status, setStatus] = useState("idle");
 
-  const sendEmail = (e) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const sendEmail = async (e) => {
     e.preventDefault();
     setStatus("sending");
 
-    const VITE_SERVICE_ID = import.meta.env.VITE_SERVICE_ID;
-    const VITE_TEMPLATE_ID = import.meta.env.VITE_TEMPLATE_ID;
-    const VITE_PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-    emailjs
-      .sendForm(
-        VITE_SERVICE_ID,
-        VITE_TEMPLATE_ID,
-        form.current,
-        VITE_PUBLIC_KEY,
-      )
-      .then(
-        () => {
-          setStatus("success");
-          form.current.reset();
-          setTimeout(() => setStatus("idle"), 5000);
-        },
-        () => {
-          setStatus("error");
-          setTimeout(() => setStatus("idle"), 5000);
-        },
-      );
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.message);
+
+      setStatus("success");
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+
+      setTimeout(() => setStatus("idle"), 5000);
+    } catch (error) {
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 5000);
+    }
   };
 
   return (
@@ -60,7 +76,7 @@ function Contact() {
 
             <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-tight">
               Let’s build something <br />
-              <span className="text-transparent bg-clip-text  bg-linear-to-r from-primary to-accent">
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-accent">
                 meaningful together
               </span>
             </h3>
@@ -72,7 +88,6 @@ function Contact() {
             </p>
 
             <div className="space-y-4">
-              {/* EMAIL CARD */}
               <a
                 href="mailto:mdshazzadhosenzisan@gmail.com"
                 className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-primary/50 transition-all group"
@@ -88,14 +103,12 @@ function Contact() {
                   <p className="text-xs text-white/40 uppercase font-bold">
                     Email Me
                   </p>
-
                   <p className="text-white font-medium break-all">
                     mdshazzadhosenzisan@gmail.com
                   </p>
                 </div>
               </a>
 
-              {/* SOCIAL BUTTONS */}
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
                   href="https://github.com/shazzad-hosen"
@@ -120,34 +133,38 @@ function Contact() {
             </div>
           </div>
 
-          {/* FORM CARD */}
+          {/* FORM */}
           <div className="p-5 sm:p-6 md:p-10 rounded-3xl bg-white/2 border border-white/10 backdrop-blur-xl shadow-2xl">
             <div className="flex items-center gap-3 mb-8">
               <MessageSquare className="text-primary" size={24} />
               <h4 className="text-xl font-bold">Send a Message</h4>
             </div>
 
-            <form ref={form} onSubmit={sendEmail} className="space-y-5">
+            <form onSubmit={sendEmail} className="space-y-5">
               <div className="grid md:grid-cols-2 gap-5">
                 <div className="space-y-2">
                   <label className="text-sm text-white/60 ml-1">Name</label>
                   <input
-                    name="user_name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
                     required
                     type="text"
                     placeholder="Ahmed Jisan"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[16px] text-white focus:outline-none focus:border-primary transition-all"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary"
                   />
                 </div>
 
                 <div className="space-y-2">
                   <label className="text-sm text-white/60 ml-1">Email</label>
                   <input
-                    name="user_email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     required
                     type="email"
                     placeholder="ahmed@example.com"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[16px] text-white focus:outline-none focus:border-primary transition-all"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary"
                   />
                 </div>
               </div>
@@ -156,10 +173,11 @@ function Contact() {
                 <label className="text-sm text-white/60 ml-1">Subject</label>
                 <input
                   name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
                   required
                   type="text"
-                  placeholder="Inquiry about Backend Project"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[16px] text-white focus:outline-none focus:border-primary transition-all"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary"
                 />
               </div>
 
@@ -167,20 +185,21 @@ function Contact() {
                 <label className="text-sm text-white/60 ml-1">Message</label>
                 <textarea
                   name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   required
                   rows="4"
-                  placeholder="How can I help you?"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[16px] text-white focus:outline-none focus:border-primary transition-all resize-none"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary resize-none"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={status === "sending" || status === "success"}
-                className={`w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all shadow-lg active:scale-[0.98] ${
+                className={`w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 ${
                   status === "success"
-                    ? "bg-green-500 text-white"
-                    : "bg-linear-to-r from-primary to-accent text-white hover:brightness-110 disabled:opacity-70"
+                    ? "bg-green-500"
+                    : "bg-linear-to-r from-primary to-accent"
                 }`}
               >
                 {status === "idle" && (
@@ -188,20 +207,17 @@ function Contact() {
                     <Send size={18} /> Send Message
                   </>
                 )}
-
                 {status === "sending" && (
                   <>
                     <Loader2 size={18} className="animate-spin" /> Sending...
                   </>
                 )}
-
                 {status === "success" && (
                   <>
                     <CheckCircle size={18} /> Message Sent!
                   </>
                 )}
-
-                {status === "error" && <>Try Again</>}
+                {status === "error" && "Try Again"}
               </button>
 
               {status === "error" && (
@@ -211,13 +227,6 @@ function Contact() {
               )}
             </form>
           </div>
-        </div>
-
-        <div className="mt-24 pt-8 border-t border-white/5 text-center">
-          <p className="text-white/30 text-sm">
-            © {new Date().getFullYear()} Shazzad Hosen. Built with React &
-            Tailwind.
-          </p>
         </div>
       </div>
     </section>
