@@ -6,13 +6,15 @@ import rateLimit from "express-rate-limit";
 
 dotenv.config();
 
-const app = express(); 
+const app = express();
 
 app.use(
   cors({
     origin: process.env.CLIENT_URL,
   }),
 );
+
+app.set("trust proxy", 1);
 
 const contactLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
