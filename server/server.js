@@ -6,7 +6,7 @@ import rateLimit from "express-rate-limit";
 
 dotenv.config();
 
-const app = express();
+const app = express(); 
 
 app.use(
   cors({
