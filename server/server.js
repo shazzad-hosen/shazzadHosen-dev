@@ -8,9 +8,22 @@ dotenv.config();
 
 const app = express();
 
+const allowedOrigins = [`${process.env.CLIENT_URL}`, "http://localhost:5173"];
+
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+
+      const normalizedOrigin = origin.replace(/\/$/, "");
+
+      if (allowedOrigins.includes(normalizedOrigin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error("Not allowed by CORS"));
+    },
+    credentials: true,
   }),
 );
 
@@ -28,11 +41,11 @@ const contactLimiter = rateLimit({
 
 app.use(express.json());
 
-app.use("/api/contact", contactLimiter, contactRoutes);
-
 app.get("/", (req, res) => {
   res.send("Backend running");
 });
+
+app.use("/api/contact", contactLimiter, contactRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
