@@ -8,6 +8,9 @@ dotenv.config();
 
 const app = express();
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 const allowedOrigins = [`${process.env.CLIENT_URL}`, "http://localhost:5173"];
 
 app.use(
@@ -39,7 +42,6 @@ const contactLimiter = rateLimit({
   legacyHeaders: false,
 });
 
-app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Backend running");
